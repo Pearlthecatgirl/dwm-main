@@ -6,8 +6,8 @@ static const unsigned int gappx     = 10;        /* gaps between windows */
 static const unsigned int snap      = 0;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=12" };
-static const char dmenufont[]       = "monospace:size=12";
+static const char *fonts[]          = { "monospace:size=13" };
+static const char dmenufont[]       = "monospace:size=13";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -30,7 +30,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "󰄛", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -40,10 +40,11 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Steam",    NULL,	  NULL,	      8,	    1,		 -1 },
+	{ "steam",    NULL,	  NULL,	      8,	    0,		 -1 },
 	{ "DaggerfallUnity.x86_64",    NULL,	  NULL,	      8,	    1,		 -1 },
 	{ "openmw",    NULL,	  NULL,	      8,	    1,		 -1 },
 	{ "openmw-launcher",    NULL,	  NULL,	      8,	    1,		 -1 },
+	{ "MuPDF",    NULL,	  NULL,	      2,	    0,		 -1 },
 	{ "Heroic",   NULL,	  NULL,       8,	    1,		 -1}
 };
 
@@ -91,6 +92,11 @@ static const char *downbrillo[] = { "brillo", "-q", "-U", "5", NULL};
 static const char *pausecmd[] = {"playerctl", "play-pause", NULL};
 static const char *nextcmd[] = {"playerctl", "next", NULL};
 static const char *prevcmd[] = {"playerctl", "previous", NULL};
+static const char *aBlur[] = {"picom-trans", "-c", "20", NULL};
+static const char *bBlur[] = {"picom-trans", "-c", "40", NULL};
+static const char *cBlur[] = {"picom-trans", "-c", "60", NULL};
+static const char *dBlur[] = {"picom-trans", "-c", "80", NULL};
+static const char *eBlur[] = {"picom-trans", "-c", "100", NULL};
 static const char *libwolf[] = {"librewolf", NULL};
 static const char *firefox[] = {"firefox", NULL};
 
@@ -161,7 +167,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
+	TAGKEYS(                        XK_9,                      8) 
 	{ MODKEY|ShiftMask,             XK_e,      quitprompt,           {0} },
 };
 
