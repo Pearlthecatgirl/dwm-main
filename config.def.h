@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 10;        /* gaps between windows */
 static const unsigned int snap      = 0;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -12,7 +12,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#bfa793";
-static const char col_cyan[]        = "#96392A";
+static const char col_cyan[]        = "#313338";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -21,10 +21,9 @@ static const char *colors[][3]      = {
 
 static const char *const autostart[] = {
 	"st", NULL,
-	"picom", "-f", NULL,
-	"nm-applet", NULL,
+	"picom", NULL,
 	"slstatus", NULL,
-	"hsetroot", "-center", "/home/pearl/wallpapers/background.png", NULL,
+	"hsetroot", "-full", "/home/pearl/wallpapers/background.png", NULL,
 	"libinput-gestures", NULL,
 	NULL /* terminate */
 };
@@ -41,10 +40,10 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "steam",    NULL,	  NULL,	      8,	    0,		 -1 },
+	{ "MuPDF",    NULL,	  NULL,	      2,	    0,		 -1 },
 	{ "DaggerfallUnity.x86_64",    NULL,	  NULL,	      8,	    1,		 -1 },
 	{ "openmw",    NULL,	  NULL,	      8,	    1,		 -1 },
 	{ "openmw-launcher",    NULL,	  NULL,	      8,	    1,		 -1 },
-	{ "MuPDF",    NULL,	  NULL,	      2,	    0,		 -1 },
 	{ "Heroic",   NULL,	  NULL,       8,	    1,		 -1}
 };
 
@@ -76,10 +75,11 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-
 static const char *filecmd[]  = { "pcmanfm", NULL};
+static const char *calendar[]  = { "st", "-e", "calcurse", NULL};
 static const char *screenshotcmd[] = { "/home/pearl/Scripts/screenshot.sh", NULL};
 static const char *slock[] = { "slock", NULL};
+static const char *pavucontrol[] = { "pavucontrol", NULL};
 static const char *upvol[] = { "pactl", "set-sink-volume", "0", "+5%", NULL};
 static const char *mute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL};
 static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-5%", NULL};
@@ -92,19 +92,16 @@ static const char *downbrillo[] = { "brillo", "-q", "-U", "5", NULL};
 static const char *pausecmd[] = {"playerctl", "play-pause", NULL};
 static const char *nextcmd[] = {"playerctl", "next", NULL};
 static const char *prevcmd[] = {"playerctl", "previous", NULL};
-static const char *aBlur[] = {"picom-trans", "-c", "20", NULL};
-static const char *bBlur[] = {"picom-trans", "-c", "40", NULL};
-static const char *cBlur[] = {"picom-trans", "-c", "60", NULL};
-static const char *dBlur[] = {"picom-trans", "-c", "80", NULL};
-static const char *eBlur[] = {"picom-trans", "-c", "100", NULL};
 static const char *libwolf[] = {"librewolf", NULL};
 static const char *firefox[] = {"firefox", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_i,      spawn,          {.v = pavucontrol } },
 	{ MODKEY,	               	XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,	        XK_x, 	   spawn,          {.v = filecmd } },
+	{ MODKEY|ShiftMask,	        XK_u, 	   spawn,          {.v = calendar } },
 	{ MODKEY|ShiftMask,	        XK_p,	   spawn,          {.v = screenshotcmd } },
 	{ MODKEY,	              	XK_x, 	   spawn,          {.v = libwolf } },
 	{ MODKEY|ShiftMask,             XK_f,	   spawn,          {.v = firefox } },
